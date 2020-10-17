@@ -7,9 +7,18 @@ chrome.storage.sync.get('color', function(data) {
 	changeColor.setAttribute('value', data.color);
 });
 
+document.querySelector('#openOptions').addEventListener("click", function() {
+	if (chrome.runtime.openOptionsPage) {
+		chrome.runtime.openOptionsPage();
+	} else {
+		window.open(chrome.runtime.getURL('options.html'));
+	}
+});
+
 changeColor.onclick = function(element) {
 	let color = element.target.value;
 
+	//trying to select highlighted text and display it
 	chrome.tabs.executeScript( {
 		code: "window.getSelection().toString();"
 	}, function(selection) {
