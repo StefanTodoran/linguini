@@ -9,6 +9,18 @@ document.querySelector('#openOptions').addEventListener("click", function() {
 	}
 });
 
+chrome.tabs.executeScript( {
+	code: "window.getSelection().toString();"
+}, function(selection) {
+	document.getElementById("output").textContent = selection[0];
+});
+
+// addEventListener for highlight selection changing
+/*document.addEventListener('selectionchange', () => {
+	document.getElementById('output').textContent = document.getSelection();
+});
+
+/*
 //trying to select highlighted text and display it
 chrome.tabs.executeScript( {
 	code: "window.getSelection().toString();"
