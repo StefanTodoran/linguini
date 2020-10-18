@@ -1,7 +1,7 @@
   {
   	"name": "linguini",
   	"version": "1.0",
-  	"description": "Linguini - A lightweight extension helping non-native language speakers read with confidence.",
+  	"description": "Linguini - A lightweight Chrome extension helping non-native language speakers read with confidence.",
   	"permissions": ["activeTab", "declarativeContent", "storage"],
   	"background": {
   		"scripts": ["background.js"],
