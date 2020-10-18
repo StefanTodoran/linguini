@@ -38,8 +38,7 @@ selectLang.onchange = function(element) {
 };
 
 function updateInfo(k,l_id) {
-	let l = languages[l_id].name;
-	changeHotkey.value = "Click to Change ("+k+")";
+	changeHotkey.value = "Click to Change (" + k.charAt(0).toUpperCase() + k.slice(1) + ")";
 	let selLangElement = document.getElementById('lang-element-' + l_id);
 	if (selLangElement != null) {
 		selLangElement.selected = true;
