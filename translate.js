@@ -1,40 +1,83 @@
-import keys from keys;
+var keys = null;
 
-function microsoftLanguages(callback) {
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", keys.microsoft.endpoint);
-    xhttp.send();
-	xhttp.onload = function() {
-		callback(xhttp.response);
-	}
+fetch(chrome.runtime.getURL("keys.json")).then(result => result.json()).then(result => keys = result);
+
+async function getLanguages() {
+    var microsoftLanguages = await getMicrosoftLanguages();
+    var googleLanguages = await getGoogleLanguages();
+    var languages = {};
+    for (var [id, language] of Object.entries(microsoftLanguages)) {
+        if (googleLanguages.includes(id)) {
+            languages[id] = {
+                name: language.name,
+                nativeName: language.nativeName,
+                direction: language.dir
+            }
+        }
+    }
+    return languages;
 }
 
-function microsoftTranslate(text, targetLanguage, callback) {
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("POST", keys.microsoft.endpoint + "&to=" + targetLanguage);
-	xhttp.setRequestHeader('Ocp-Apim-Subscription-Key', keys.microsoft.key1);
-	xhttp.setRequestHeader('Content-Type', 'application/json');
-	xhttp.send(JSON.stringify([{"text": text}]));
-	xhttp.onload = function() {
-		callback(xhttp.response);
-	}
+async function getMicrosoftLanguages() {
+    var response = await fetch("https://api.cognitive.microsofttranslator.com/languages?api-version=3.0", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    response = await response.json();
+    var languages = response.translation;
+    return languages;
 }
 
-function googleLanguages(callback) {
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", keys.google.endpoint + "/langauges?key=" + keys.google.key);
-    xhttp.send();
-	xhttp.onload = function() {
-	  callback(xhttp.response);
-	}
+async function microsoftTranslate(text, targetLanguage) {
+    var response = await fetch("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=" + targetLanguage, {
+        method: 'POST',
+        headers: {
+            'Ocp-Apim-Subscription-Key': keys.microsoft.key,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify([{
+            "text": text
+        }])
+    });
+    response = await response.json();
+    var translation = {
+        detected: response[0].detectedLanguage.language,
+        confidence: response[0].detectedLanguage.score,
+        text: response[0].translations[0].text
+    }
+    return translation;
 }
 
-function googletranslate(text, targetLanguage, callback) {
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("POST", keys.google.endpoint + "?key=" + keys.google.key);
-	xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-	xhttp.send('{"q": ["' + text + '"], "target": "' + targetLanguage + '"}');
-	xhttp.onload = function() {
-	  callback(xhttp.response);
-	}
+async function getGoogleLanguages() {
+    var response = await fetch("https://translation.googleapis.com/language/translate/v2/languages?key=" + keys.google.key, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    response = await response.json();
+    var languages = [];
+    response.data.languages.forEach(element => languages.push(element.language));
+    return languages;
+}
+
+async function googleTranslate(text, targetLanguage) {
+    var response = await fetch("https://translation.googleapis.com/language/translate/v2?key=" + keys.google.key, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "q": [text], 
+            "target": targetLanguage
+        })
+    });
+    response = await response.json();
+    var translation = {
+        detected: response.data.translations[0].detectedSourceLanguage,
+        text: response.data.translations[0].translatedText
+    }
+    return translation;
 }
