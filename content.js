@@ -34,7 +34,7 @@ async function makePopupInner(text) {
 		outText += "detected: " + gresult.detected + "\n" + mresult.text + "\n";
 	} else {
 		outText += "detected: " + gresult.detected + "\n"
-		 + gresult.text + "\n  -or-\n" + mresult.text + "\n";
+		+ gresult.text + "\n  -or-\n" + mresult.text + "\n";
 	}
 	origText.innerText = outText;
 	return origText;
@@ -102,8 +102,14 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 document.addEventListener("keydown", function (event) {
 	console.log("Keypress event occured. Set hotkey="+hotkey+" pressed key="+event.key);
 	console.log("(hotkey == undefined): "+(hotkey == undefined));
-	if (hotkey == undefined) { hotkey = 't'; console.log ("defauling to t");} //this is how we default the value
-	if (event.key == hotkey && curSel != null) {
+	if (hotkey == undefined) { 
+		chrome.storage.local.get(['hotkey'], function(result) { 
+			hotkey = result.hotkey;
+			if (event.key == hotkey && curSel != null) {
+				makePopup(curSel);
+			}
+		});
+	} else if (event.key == hotkey && curSel != null) {
 		makePopup(curSel);
 	}
 });

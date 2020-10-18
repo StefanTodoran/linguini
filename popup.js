@@ -1,39 +1,44 @@
 'use strict';
 
 let langInfo = document.getElementById('langInfo');
-let changeLang = document.getElementById('changeLang');
+let selectLang = document.getElementById("languages");
 let key = 't';
-let lang = 'English';
+let langid = 'en';
 let languages;
 
 window.onload = async function() {
-	console.log("onload function running...");
-	chrome.storage.local.get(['hotkey'], function(result) { 
-		key = result.hotkey; 
-		console.log(result.hotkey);
-		updateInfo(key,lang);
-	});
-
+	console.log("Popup onload function running...");
 	var dropdown = document.getElementById('languages');
 	languages = await getLanguages();
+	
 	for (let id of Object.keys(languages)) {
 		var item = document.createElement('option');
 		item.value = id;
 		item.innerText = languages[id].name;
 		dropdown.appendChild(item);
 	}
-	console.log(key);
-	//lang = await chrome.storage.sync.get(['lang'], function(result) {console.log(result.key);});
+
+	chrome.storage.local.get(['hotkey'], function(result) { 
+		key = result.hotkey; 
+		console.log(result.hotkey);
+		updateInfo(key,langid);
+	});
+
+	chrome.storage.local.get(['lang'], function(result) { 
+		langid = result.lang; 
+		console.log(result.lang);
+		updateInfo(key,langid);
+	});
 }
 
-changeLang.onclick = function(element) {
-	let selectLang = document.getElementById("languages");
-	let langid = selectLang.options[selectLang.selectedIndex].value;
-	lang = languages[langid].name;
-	updateInfo(key,lang);
+selectLang.onchange = function(element) {
+	langid = selectLang.options[selectLang.selectedIndex].value;
+	chrome.storage.local.set({lang: langid}, function() { console.log("Language has been updated."); });
+	updateInfo(key,langid);
 };
 
-function updateInfo(k,l) {
+function updateInfo(k,l_id) {
+	let l = languages[l_id].name;
 	changeHotkey.value = "Click to Change ("+k+")";
 	langInfo.textContent = "Currently translating into "+l+".";
 }
@@ -54,6 +59,6 @@ document.addEventListener("keydown", function (event) {
 		chrome.storage.local.set({hotkey: event.key}, function() { console.log("Hotkey has been updated."); });
 		waiting = false;
 		key = event.key;
-		updateInfo(key,lang);
+		updateInfo(key,langid);
 	}
 });
