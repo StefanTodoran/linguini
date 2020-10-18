@@ -1,3 +1,14 @@
+.container {
+	font-family: Arial;
+	padding: 12.5px;
+	overflow: hidden;
+	background-color: #222222; 
+}
+
+.color {
+	color:white;
+  }
+
 #linguini-popup-base {
 	all: initial;
 
