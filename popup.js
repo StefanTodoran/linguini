@@ -1,23 +1,37 @@
 'use strict';
 
-let output = document.getElementById('output');
+let infoLang = document.getElementById('infoLang');
+let key = 't';
+let lang = 'English';
 
-//this updates right when anything in storage is changed, so limit changes to storage data
-chrome.storage.onChanged.addListener(function(changes, namespace) {
-	let raw = JSON.stringify(changes.selection.newValue);
-	/*let len = 50;
-	let data;
-	if (raw.length > len) {
-		data = raw.substring(0, len) + '..."';
-	} else { data = raw; }
-	output.textContent = data;*/
-});
+window.onload = async function() {
+	console.log("onload function running...");
+	key = await chrome.storage.sync.get(['key'], function(result) {console.log(result.key);});
+	//lang = await chrome.storage.sync.get(['lang'], function(result) {console.log(result.key);});
+	updateInfo(key,lang);
+}
 
-chrome.tabs.executeScript( {
-	code: "window.getSelection().toString();"
-	}, function(selection) {
-	//document.getElementById('output').textContent = selection[0];
-	chrome.storage.sync.set({selection: selection[0]}, function() {
-		console.log("Highlighted selection has been updated.");
-	});
+function updateInfo(k,l) {
+	changeHotkey.value = "Click to Change ("+k+")";
+	infoLang.textContent = 'Language currently set to '+l+'.'
+}
+
+let changeHotkey = document.getElementById('changeHotkey');
+let waiting = false; //if we are waiting for the user to enter a new hotkey
+
+changeHotkey.onclick = function(element) {
+	if (!waiting) {
+		changeHotkey.value = "Enter any key...";
+		waiting = true;
+	}
+};
+
+document.addEventListener("keydown", function (event) {
+	if (waiting) {
+		console.log(event.key);
+		chrome.storage.sync.set({hotkey: event.key}, function() { console.log("Hotkey has been updated."); });
+		waiting = false;
+		key = event.key;
+		updateInfo(key,lang);
+	}
 });

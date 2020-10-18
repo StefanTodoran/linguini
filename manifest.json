@@ -1,7 +1,7 @@
   {
   	"name": "linguini",
   	"version": "1.0",
-  	"description": "Easily and quickly find translations as you surf the web",
+  	"description": "Linguini is a lightweight, unintrusive extension that brings translations from multiple sources to non-native speakers and language students at the click of a button.",
   	"permissions": ["activeTab", "declarativeContent", "storage"],
   	"background": {
   		"scripts": ["background.js"],
