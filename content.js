@@ -54,10 +54,6 @@ async function makePopupInner(text) {
 		detectedLabel.innerText = "Detected: " + languages[microsoftTranslation.detected].name;
 		detectedLabel.className = "label-text";
 		base.appendChild(detectedLabel);
-		var confidenceLabel = document.createElement('p');
-		confidenceLabel.innerText = "Confidence: " + microsoftTranslation.confidence;
-		confidenceLabel.className = "label-text";
-		base.appendChild(confidenceLabel);
 	}
 	return base;
 }
@@ -69,13 +65,10 @@ async function makePopup(selection) {
 		console.log(selection);
 		console.log(seltext);
 		var selRange = selection.getRangeAt(0).getBoundingClientRect();
-		var parent = selection.anchorNode.parentElement;
-		
 		console.log("makeing popup");
 		var base = document.createElement("div");
 		base.id = "linguini-popup-base";
 		base.className = "linguini-clearable";
-		
 		style = ""
 		if (selRange.right < window.innerWidth/2) {
 			style += "left:" + selRange.right + "px;";
@@ -88,11 +81,8 @@ async function makePopup(selection) {
 			style += "bottom:" + (window.innerHeight - selRange.top) + "px;";
 		}
 		base.style = style;
-		
 		var innerPopup = await makePopupInner(seltext);
-		
 		base.appendChild(innerPopup);
-		
 		document.body.appendChild(base);
 	}
 }
@@ -100,7 +90,6 @@ async function makePopup(selection) {
 var curSel = null;
 
 document.addEventListener('mouseup', function() {
-	//console.log(window.getSelection());
 	clearPopups();
 	var selection = window.getSelection();
 	var seltext = selection.toString();
@@ -108,10 +97,6 @@ document.addEventListener('mouseup', function() {
 		selection = null;
 	}
 	curSel = selection;
-	// chrome.runtime.sendMessage({
-	// 	action: "changed-selection",
-	// 	selected: window.getSelection().toString()
-	// })
 });
 
 var hotkey; //can't set the default value here or we will have errors. see line 88
@@ -126,7 +111,6 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 	console.log("Hotkey updated in content.js to "+hotkey);
 	console.log("Lang updated to " + selLang);
 });
-
 chrome.storage.local.get(['lang'], function(result) {
 	selLang = result.lang;
 })
@@ -145,6 +129,5 @@ document.addEventListener("keydown", function (event) {
 		makePopup(curSel);
 	}
 });
-
 
 setupStyles();

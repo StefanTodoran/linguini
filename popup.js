@@ -9,7 +9,6 @@ window.onload = async function() {
 	console.log("Popup onload function running...");
 	var dropdown = document.getElementById('languages');
 	languages = await getLanguages();
-	
 	for (let id of Object.keys(languages)) {
 		var item = document.createElement('option');
 		item.value = id;
@@ -17,13 +16,11 @@ window.onload = async function() {
 		item.innerText = languages[id].nativeName;
 		dropdown.appendChild(item);
 	}
-
 	chrome.storage.local.get(['hotkey'], function(result) {
 		key = result.hotkey;
 		console.log(result.hotkey);
 		updateInfo(key,langid);
 	});
-
 	chrome.storage.local.get(['lang'], function(result) {
 		langid = result.lang;
 		console.log(result.lang);
