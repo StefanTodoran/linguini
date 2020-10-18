@@ -4,7 +4,13 @@ let output = document.getElementById('output');
 
 //this updates right when anything in storage is changed, so limit changes to storage data
 chrome.storage.onChanged.addListener(function(changes, namespace) {
-	output.textContent = JSON.stringify(changes.selection.newValue);
+	let raw = JSON.stringify(changes.selection.newValue);
+	/*let len = 50;
+	let data;
+	if (raw.length > len) {
+		data = raw.substring(0, len) + '..."';
+	} else { data = raw; }
+	output.textContent = data;*/
 });
 
 chrome.tabs.executeScript( {
