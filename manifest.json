@@ -1,7 +1,7 @@
   {
   	"name": "linguini",
   	"version": "1.0",
-  	"description": "Build an Extension!",
+  	"description": "Easily and quickly find translations as you surf the web",
   	"permissions": ["activeTab", "declarativeContent", "storage"],
   	"background": {
   		"scripts": ["background.js"],
