@@ -106,7 +106,7 @@ document.addEventListener('mouseup', function() {
 	// })
 });
 
-var hotkey = 't';
+var hotkey; //can't set the default value here or we will have errors. see line 88
 chrome.storage.onChanged.addListener(function(changes, namespace) {
 	let raw = changes.hotkey.newValue;
 	hotkey = raw;
@@ -115,6 +115,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 
 document.addEventListener("keydown", function (event) {
 	console.log("Keypress event occured. Set hotkey="+hotkey+" pressed key="+event.key);
+	if (hotkey == undefined) { hotkey = 't'; } //this is how we default the value
 	if (event.key == hotkey && curSel != null) {
 		makePopup(curSel);
 	}
