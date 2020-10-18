@@ -76,9 +76,16 @@ document.addEventListener('mouseup', function() {
 	// })
 });
 
+var hotkey = 't';
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+	let raw = changes.hotkey.newValue;
+	hotkey = raw;
+	console.log("Hotkey updated in content.js to "+hotkey);
+});
+
 document.addEventListener("keydown", function (event) {
-	console.log(event.keyCode);
-	if (event.keyCode == 84 && curSel != null) {
+	console.log("Keypress event occured. Set hotkey="+hotkey+" pressed key="+event.key);
+	if (event.key == hotkey && curSel != null) {
 		makePopup(curSel);
 	}
 });

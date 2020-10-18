@@ -12,12 +12,13 @@
       background-size: contain;
       overflow: hidden;
     }
-</style>
+  </style>
 </head>
 <body>
   <div class="container">
-    <p>Linguini is a lightweight and unintrusive chrome extension that brings translations from multiple sources to non-native speakers and language students at the click of a button.</p>
-    <p>Currently set to English</p>
+    <p>Highlight any text and press the designated translate hotkey to view translations.</p>
+    <p id="infoLang">Language currently set to</p>
+    <br>
     <form action="">
       <label for="languages">Select language:</label>
       <div>
@@ -29,7 +30,9 @@
         <input type="submit">
       </div>
     </form>
-    <p id="output"></p>
+    <br>
+    <label for="changeHotkey">Select Hotkey:</label>
+    <input type="button" id="changeHotkey" value="Click to Change (t)">
     <script src="popup.js"></script>
   </div>
 </body>
