@@ -1,5 +1,17 @@
 'use strict';
 
+const key = "AIzaSyBS4NBe2dbZUym0xRMH5V7eObaGDA3dWY0";
+
+function googletranslate(text, language, callback) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("POST", "https://translation.googleapis.com/language/translate/v2?key=" + key);
+	xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+	xhttp.send('{"q": ["' + text + '"], "target": "' + language + '"}');
+	xhttp.onload = function() {
+	  callback(xhttp.response);
+	}
+}
+
 //this is the code for the options page button
 document.querySelector('#openOptions').addEventListener("click", function() {
 	if (chrome.runtime.openOptionsPage) {
@@ -30,9 +42,9 @@ chrome.tabs.executeScript( {
 
 //alternative selection method, not sure how to implement
 /*
-let el = activeWindow.document.activeElement; 	
-if (isTextElem(el)) { 		
-	if ('selectionStart' in el && el.selectionStart !== el.selectionEnd) { 			
-		return el.value.substring(el.selectionStart, el.selectionEnd); 		
-	} 	
+let el = activeWindow.document.activeElement;
+if (isTextElem(el)) {
+	if ('selectionStart' in el && el.selectionStart !== el.selectionEnd) {
+		return el.value.substring(el.selectionStart, el.selectionEnd);
+	}
 }*/
