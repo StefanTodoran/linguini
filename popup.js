@@ -13,7 +13,7 @@ window.onload = async function() {
 
 function updateInfo(k,l) {
 	changeHotkey.value = "Click to Change ("+k+")";
-	infoLang.textContent = 'Language currently set to '+l+'.'
+	infoLang.textContent = 'Language currently set to '+l+'.';
 }
 
 let changeHotkey = document.getElementById('changeHotkey');
