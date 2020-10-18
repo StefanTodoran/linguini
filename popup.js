@@ -23,4 +23,4 @@ chrome.tabs.executeScript( {
 	chrome.storage.sync.set({selection: selection[0]}, function() {
 		console.log("Highlighted selection has been updated.");
 	});
-});//*/
+});
