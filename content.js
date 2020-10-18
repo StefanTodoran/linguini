@@ -35,7 +35,7 @@ function makePopup(selection) {
 		if (selRange.right < window.innerWidth/2) {
 			style += "left:" + selRange.right + "px;";
 		} else {
-			style += "right:" + (window.innerWidth - selRange.left) + "px;";
+			style += "right:" + (window.innerWidth - selRange.right) + "px;";
 		}
 		if (selRange.bottom < window.innerHeight/2) {
 			style += "top:" + selRange.bottom + "px;";
