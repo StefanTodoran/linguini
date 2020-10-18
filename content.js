@@ -21,6 +21,7 @@ function clearPopups() {
 
 async function makePopupInner(text) {
 	var base = document.createElement('div');
+	base.className = "inner-div";
 	if (text.length > maxTextLength) {
 		var errorText = document.createElement('p');
 		errorText.innerText = "We do not recommend translating large amounts of text.";

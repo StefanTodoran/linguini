@@ -16,24 +16,31 @@
 	border-style: solid;
 	border-width: 2px;
 	border-color: #ffcf40;
+	
+	line-height: normal;
+	margin: 0px;
+}
+
+#linguini-popup-base .inner-div {
+	padding: 10px;
 }
 
 #linguini-popup-base .main-text {
 	font-family: Arial;
-	padding: 5px;
+	padding: 0px;
 	font-weight: normal;
 	font-size: 16px;
-	line-height: 0px;
-	height: 10px;
+	line-height: normal;
 	color: black;
+	margin: 0px;
 }
 
 #linguini-popup-base .label-text {
 	font-family: Arial;
-	padding: 5px;
+	padding: 0px;
 	font-weight: normal;
 	font-size: 10px;
-	line-height: 0px;
-	height: 0px;
+	line-height: normal;
 	color: #444444;
+	margin: 0px;
 }

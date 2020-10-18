@@ -14,7 +14,7 @@ window.onload = async function() {
 		var item = document.createElement('option');
 		item.value = id;
 		item.id = 'lang-element-' + id;
-		item.innerText = languages[id].name;
+		item.innerText = languages[id].nativeName;
 		dropdown.appendChild(item);
 	}
 
