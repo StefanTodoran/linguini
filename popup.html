@@ -17,22 +17,18 @@
 <body>
   <div class="container">
     <p>Highlight any text and press the designated translate hotkey to view translations.</p>
-    <p id="infoLang">Language currently set to</p>
+    <p id="langInfo">Language currently set to ...</p>
     <br>
-    <form action="">
-      <label for="languages">Select language:</label>
-      <div>
-        <select id="languages" name="languages">
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="mn">Mandarin</option>
-        </select>
-        <input type="submit">
-      </div>
-    </form>
+    <label for="languages">Select language:</label>
+    <div>
+      <select id="languages" name="languages">
+      </select>
+      <input type="button" id="changeLang" value="Save">
+    </div>
     <br>
     <label for="changeHotkey">Select Hotkey:</label>
     <input type="button" id="changeHotkey" value="Click to Change (t)">
+    <script src="translate.js"></script>
     <script src="popup.js"></script>
   </div>
 </body>
