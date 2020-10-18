@@ -1,19 +1,12 @@
 
 console.log("backround script is running");
 
-function makePopupdas(parent, seltext, x, y) {
-	console.log("makeing popup");
-	var base = document.createElement("div");
-	var origText = document.createElement('p');
-	var newText = document.createElement('p');
-	origText.innerText = seltext;
-	newText.innerText = "translated";
-	base.appendChild(origText);
-	base.appendChild(newText);
-	base.id = "linguini-popup-base";
-	base.className = "linguini-clearable";
-	base.style = "position:fixed; left:" + x + "px; top:" + y + "px;";
-	parent.appendChild(base);
+function setupStyles() {
+	var link = document.createElement("link");
+	link.href = chrome.runtime.getURL("pagePopup.css");
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	document.getElementsByTagName("head")[0].appendChild(link);
 }
 
 function clearPopups() {
@@ -30,34 +23,38 @@ function makePopup(selection) {
 	if (selection != "") {
 		console.log(selection);
 		console.log(seltext);
-		// chrome.storage.sync.set({selection: seltext}, function() {
-		// 	console.log("Highlighted selection has been updated.");
-		// });
 		var selRange = selection.getRangeAt(0).getBoundingClientRect();
-		// var button = document.createElement('button');
 		var parent = selection.anchorNode.parentElement;
-		// button.id = "linguini-popup-button";
-		// button.className = "linguini-clearable";
-		// button.onclick = function() {
-		// 	makePopup(parent, seltext, selRange.right, selRange.bottom);
-		// }
-		// button.style = "position:fixed; left:" + selRange.right + "px; top:" + selRange.bottom + "px;";
-		// parent.appendChild(button);
 		
 		console.log("makeing popup");
 		var base = document.createElement("div");
-		var origText = document.createElement('p');
-		var newText = document.createElement('p');
-		origText.innerText = seltext;
-		newText.innerText = "translated";
-		base.appendChild(origText);
-		base.appendChild(newText);
 		base.id = "linguini-popup-base";
 		base.className = "linguini-clearable";
-		base.style = "position:fixed; background-color:#FFFFFF; left:"
-		 + selRange.right + "px; top:" + selRange.bottom + "px;"
-		 + " padding: 20px; border-radius: 10px; border-style: solid;"
-		 + " border-width: 2px;";
+		
+		style = ""
+		if (selRange.right < window.innerWidth/2) {
+			style += "left:" + selRange.right + "px;";
+		} else {
+			style += "right:" + (window.innerWidth - selRange.left) + "px;";
+		}
+		if (selRange.bottom < window.innerHeight/2) {
+			style += "top:" + selRange.bottom + "px;";
+		} else {
+			style += "bottom:" + (window.innerHeight - selRange.top) + "px;";
+		}
+		base.style = style;
+		
+		var origText = document.createElement('p');
+		origText.className = "linguini-text";
+		// var newText = document.createElement('p');
+		// newText.className = "linguini-text";
+		
+		origText.innerText = seltext + "\ntranslated";
+		//newText.innerText = "translated";
+		
+		base.appendChild(origText);
+		// base.appendChild(newText);
+		
 		parent.appendChild(base);
 	}
 }
@@ -85,3 +82,6 @@ document.addEventListener("keydown", function (event) {
 		makePopup(curSel);
 	}
 });
+
+
+setupStyles();

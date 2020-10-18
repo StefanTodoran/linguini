@@ -28,5 +28,8 @@
         "js": ["content.js"]
       }
     ],
+    "web_accessible_resources":[
+      "pagePopup.css"
+    ],
   	"manifest_version": 2
   }
