@@ -6,9 +6,13 @@ let lang = 'English';
 
 window.onload = async function() {
 	console.log("onload function running...");
-	key = await chrome.storage.sync.get(['key'], function(result) {console.log(result.key);});
+	chrome.storage.local.get(['hotkey'], function(result) { 
+		key = result.hotkey; 
+		console.log(result.hotkey);
+		updateInfo(key,lang);
+	});
+	console.log(key);
 	//lang = await chrome.storage.sync.get(['lang'], function(result) {console.log(result.key);});
-	updateInfo(key,lang);
 }
 
 function updateInfo(k,l) {
@@ -29,7 +33,7 @@ changeHotkey.onclick = function(element) {
 document.addEventListener("keydown", function (event) {
 	if (waiting) {
 		console.log(event.key);
-		chrome.storage.sync.set({hotkey: event.key}, function() { console.log("Hotkey has been updated."); });
+		chrome.storage.local.set({hotkey: event.key}, function() { console.log("Hotkey has been updated."); });
 		waiting = false;
 		key = event.key;
 		updateInfo(key,lang);

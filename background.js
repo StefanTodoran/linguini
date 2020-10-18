@@ -1,6 +1,6 @@
 'use strict';
 
-chrome.storage.sync.set({hotkey: 84}, function() {
+chrome.storage.local.set({hotkey: 't'}, function() {
 	console.log("Default hotkey is set to 't'.");
 });
 

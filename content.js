@@ -85,7 +85,8 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 
 document.addEventListener("keydown", function (event) {
 	console.log("Keypress event occured. Set hotkey="+hotkey+" pressed key="+event.key);
-	if (hotkey == undefined) { hotkey = 't'; } //this is how we default the value
+	console.log("(hotkey == undefined): "+(hotkey == undefined));
+	if (hotkey == undefined) { hotkey = 't'; console.log ("defauling to t");} //this is how we default the value
 	if (event.key == hotkey && curSel != null) {
 		makePopup(curSel);
 	}
