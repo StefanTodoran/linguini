@@ -1,6 +1,3 @@
-
-console.log("backround script is running");
-
 const maxTextLength = 500;
 
 function setupStyles() {
@@ -20,37 +17,26 @@ function clearPopups() {
 }
 
 async function makePopupInner(text) {
+	var origText = document.createElement('p');
+	origText.className = "popup-text";
 	if (text.length > maxTextLength) {
-		var origText = document.createElement('p');
-		origText.className = "linguini-text";
-		origText.innerText = "The selection is to large to translate";
+		origText.innerText = "We do not recommend translating large amounts of text. \n" + text.length + "/" + maxTextLength + " characters highlighted.";
 		return origText;
 	}
-	var base = document.createElement('div');
-	
-	
-	
 	var gtext = document.createElement('p');
 	var ghead = document.createElement('p');
 	gtext.className = "maintext";
 	ghead.className = "headertext";
-	
 	let gresult = {text:"No se", detected:"en"}; //await googleTranslate(text, 'es');
 	let mresult = {text:"Yo no se", detected:"en"};//await microsoftTranslate(text, 'es');
-	
-	
-	
 	var outText = text + "\n";
-	
 	if (gresult.text.trim().toLowerCase() == mresult.text.trim().toLowerCase()) {
 		outText += "detected: " + gresult.detected + "\n" + mresult.text + "\n";
 	} else {
 		outText += "detected: " + gresult.detected + "\n"
 		 + gresult.text + "\n  -or-\n" + mresult.text + "\n";
 	}
-	
 	origText.innerText = outText;
-	
 	return origText;
 }
 
