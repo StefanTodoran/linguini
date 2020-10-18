@@ -7,15 +7,6 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 	output.textContent = JSON.stringify(changes.selection.newValue);
 });
 
-//this is the code for the options page button
-document.querySelector('#openOptions').addEventListener("click", function() {
-	if (chrome.runtime.openOptionsPage) {
-		chrome.runtime.openOptionsPage();
-	} else {
-		window.open(chrome.runtime.getURL('options.html'));
-	}
-});
-
 chrome.tabs.executeScript( {
 	code: "window.getSelection().toString();"
 	}, function(selection) {
