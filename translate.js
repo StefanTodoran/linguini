@@ -2,6 +2,12 @@ var keys = null;
 
 fetch(chrome.runtime.getURL("keys.json")).then(result => result.json()).then(result => keys = result);
 
+/**
+ * Provides Linguini's supported languages.
+ * @return {Object}
+ *         Key: "id"
+ *         Values: "name", "nativeName", "direction"
+ */
 async function getLanguages() {
     var microsoftLanguages = await getMicrosoftLanguages();
     var googleLanguages = await getGoogleLanguages();
@@ -18,6 +24,12 @@ async function getLanguages() {
     return languages;
 }
 
+/**
+ * Provides Microsoft's supported languages.
+ * @return {Object}
+ *         Key: "id"
+ *         Values: "name", "nativeName", "dir"
+ */
 async function getMicrosoftLanguages() {
     var response = await fetch("https://api.cognitive.microsofttranslator.com/languages?api-version=3.0", {
         method: 'GET',
@@ -30,6 +42,16 @@ async function getMicrosoftLanguages() {
     return languages;
 }
 
+/**
+ * Provides Microsoft's translation for a given text.
+ * @param  {String} text   
+ *         The text to be translated.
+ * @param  {String} targetLanguage
+ *         The language the text will be translated to.
+ * @return {Object}
+ *         Key: "id"
+ *         Values: "detected", "confidence", "text"
+ */
 async function microsoftTranslate(text, targetLanguage) {
     var response = await fetch("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=" + targetLanguage, {
         method: 'POST',
@@ -50,6 +72,12 @@ async function microsoftTranslate(text, targetLanguage) {
     return translation;
 }
 
+
+/**
+ * Provides Google's supported languages.
+ * @return {Array}
+ *         Values: "id"
+ */
 async function getGoogleLanguages() {
     var response = await fetch("https://translation.googleapis.com/language/translate/v2/languages?key=" + keys.google.key, {
         method: 'GET',
@@ -63,6 +91,16 @@ async function getGoogleLanguages() {
     return languages;
 }
 
+/**
+ * Provides Google's translation for a given text.
+ * @param  {String} text   
+ *         The text to be translated.
+ * @param  {String} targetLanguage
+ *         The language the text will be translated to.
+ * @return {Object}
+ *         Key: "id"
+ *         Values: "detected", "text"
+ */
 async function googleTranslate(text, targetLanguage) {
     var response = await fetch("https://translation.googleapis.com/language/translate/v2?key=" + keys.google.key, {
         method: 'POST',
