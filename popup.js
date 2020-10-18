@@ -1,6 +1,5 @@
 'use strict';
 
-let langInfo = document.getElementById('langInfo');
 let selectLang = document.getElementById("languages");
 let key = 't';
 let langid = 'en';
@@ -14,18 +13,19 @@ window.onload = async function() {
 	for (let id of Object.keys(languages)) {
 		var item = document.createElement('option');
 		item.value = id;
+		item.id = 'lang-element-' + id;
 		item.innerText = languages[id].name;
 		dropdown.appendChild(item);
 	}
 
-	chrome.storage.local.get(['hotkey'], function(result) { 
-		key = result.hotkey; 
+	chrome.storage.local.get(['hotkey'], function(result) {
+		key = result.hotkey;
 		console.log(result.hotkey);
 		updateInfo(key,langid);
 	});
 
-	chrome.storage.local.get(['lang'], function(result) { 
-		langid = result.lang; 
+	chrome.storage.local.get(['lang'], function(result) {
+		langid = result.lang;
 		console.log(result.lang);
 		updateInfo(key,langid);
 	});
@@ -40,7 +40,10 @@ selectLang.onchange = function(element) {
 function updateInfo(k,l_id) {
 	let l = languages[l_id].name;
 	changeHotkey.value = "Click to Change ("+k+")";
-	langInfo.textContent = "Currently translating into "+l+".";
+	let selLangElement = document.getElementById('lang-element-' + l_id);
+	if (selLangElement != null) {
+		selLangElement.selected = true;
+	}
 }
 
 let changeHotkey = document.getElementById('changeHotkey');

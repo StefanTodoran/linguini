@@ -1,5 +1,6 @@
 const maxTextLength = 500;
 var languages;
+var selLang;
 getLanguages().then(result => languages = result);
 
 function setupStyles() {
@@ -30,8 +31,8 @@ async function makePopupInner(text) {
 		errorLabel.className = "label-text";
 		base.appendChild(errorLabel);
 	} else {
-		var microsoftTranslation = await microsoftTranslate(text, 'es');
-		var googleTranslation = await googleTranslate(text, 'es');
+		var microsoftTranslation = await microsoftTranslate(text, selLang);
+		var googleTranslation = await googleTranslate(text, selLang);
 		var microsoftLabel = document.createElement('p');
 		microsoftLabel.innerText = "Microsoft:";
 		microsoftLabel.className = "label-text";
@@ -91,7 +92,7 @@ async function makePopup(selection) {
 		
 		base.appendChild(innerPopup);
 		
-		parent.appendChild(base);
+		document.body.appendChild(base);
 	}
 }
 
@@ -114,16 +115,26 @@ document.addEventListener('mouseup', function() {
 
 var hotkey; //can't set the default value here or we will have errors. see line 88
 chrome.storage.onChanged.addListener(function(changes, namespace) {
-	let raw = changes.hotkey.newValue;
-	hotkey = raw;
+	if (changes.hotkey != undefined) {
+		let raw = changes.hotkey.newValue;
+		hotkey = raw;
+	}
+	if (changes.lang != undefined) {
+		selLang = changes.lang.newValue;
+	}
 	console.log("Hotkey updated in content.js to "+hotkey);
+	console.log("Lang updated to " + selLang);
 });
+
+chrome.storage.local.get(['lang'], function(result) {
+	selLang = result.lang;
+})
 
 document.addEventListener("keydown", function (event) {
 	console.log("Keypress event occured. Set hotkey="+hotkey+" pressed key="+event.key);
 	console.log("(hotkey == undefined): "+(hotkey == undefined));
-	if (hotkey == undefined) { 
-		chrome.storage.local.get(['hotkey'], function(result) { 
+	if (hotkey == undefined) {
+		chrome.storage.local.get(['hotkey'], function(result) {
 			hotkey = result.hotkey;
 			if (event.key == hotkey && curSel != null) {
 				makePopup(curSel);
