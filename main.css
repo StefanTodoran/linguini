@@ -28,6 +28,7 @@
 #linguini-popup-base .main-text {
 	font-family: Arial;
 	padding: 0px;
+	padding-bottom: 8px;
 	font-weight: normal;
 	font-size: 16px;
 	line-height: normal;
