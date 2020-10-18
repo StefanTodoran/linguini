@@ -4,6 +4,7 @@ let langInfo = document.getElementById('langInfo');
 let changeLang = document.getElementById('changeLang');
 let key = 't';
 let lang = 'English';
+let languages;
 
 window.onload = async function() {
 	console.log("onload function running...");
@@ -14,7 +15,7 @@ window.onload = async function() {
 	});
 
 	var dropdown = document.getElementById('languages');
-	let languages = await getLanguages();
+	languages = await getLanguages();
 	for (let id of Object.keys(languages)) {
 		var item = document.createElement('option');
 		item.value = id;
@@ -26,14 +27,15 @@ window.onload = async function() {
 }
 
 changeLang.onclick = function(element) {
-	var selectLang = document.getElementById("languages");
-	lang = selectLang.options[selectLang.selectedIndex].value;
+	let selectLang = document.getElementById("languages");
+	let langid = selectLang.options[selectLang.selectedIndex].value;
+	lang = languages[langid].name;
 	updateInfo(key,lang);
 };
 
 function updateInfo(k,l) {
 	changeHotkey.value = "Click to Change ("+k+")";
-	langInfo.textContent = 'Language currently set to '+l+'.';
+	langInfo.textContent = "Currently translating into "+l+".";
 }
 
 let changeHotkey = document.getElementById('changeHotkey');
