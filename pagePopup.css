@@ -9,32 +9,29 @@
 	
 	position: fixed;
 	background-color: white;
-	z-index: 2000;
+	z-index: 999999;
 	
-	border-radius: 10px;
+	border-radius: 5px;
 	border-style: solid;
 	border-width: 2px;
-	border-color: black;
-	
-	color: green;
-	font-family: Verdana;
+	border-color: #ffcf40;
+	font-family: Arial;
 }
 
-#linguini-popup-base .maintext {
+#linguini-popup-base .main-text {
 	padding: 5px;
-	margin-bottom: 0em;
-	margin-top: 0em;
-	
 	font-weight: normal;
 	font-size: 16px;
+	line-height: 0px;
+	height: 10px;
+	color: black;
 }
 
-#linguini-popup-base .maintext {
+#linguini-popup-base .label-text {
 	padding: 5px;
-	margin-bottom: 0em;
-	margin-top: 0em;
-	
 	font-weight: normal;
-	font-size: 8px;
-	color: #999999;
+	font-size: 10px;
+	line-height: 0px;
+	height: 0px;
+	color: #444444;
 }

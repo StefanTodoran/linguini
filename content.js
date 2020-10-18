@@ -1,4 +1,6 @@
 const maxTextLength = 500;
+var languages;
+getLanguages().then(result => languages = result);
 
 function setupStyles() {
 	var link = document.createElement("link");
@@ -17,27 +19,45 @@ function clearPopups() {
 }
 
 async function makePopupInner(text) {
-	var origText = document.createElement('p');
-	origText.className = "popup-text";
+	var base = document.createElement('div');
 	if (text.length > maxTextLength) {
-		origText.innerText = "We do not recommend translating large amounts of text. \n" + text.length + "/" + maxTextLength + " characters highlighted.";
-		return origText;
-	}
-	var gtext = document.createElement('p');
-	var ghead = document.createElement('p');
-	gtext.className = "maintext";
-	ghead.className = "headertext";
-	let gresult = {text:"No se", detected:"en"}; //await googleTranslate(text, 'es');
-	let mresult = {text:"Yo no se", detected:"en"};//await microsoftTranslate(text, 'es');
-	var outText = text + "\n";
-	if (gresult.text.trim().toLowerCase() == mresult.text.trim().toLowerCase()) {
-		outText += "detected: " + gresult.detected + "\n" + mresult.text + "\n";
+		var errorText = document.createElement('p');
+		errorText.innerText = "We do not recommend translating large amounts of text.";
+		errorText.className = "main-text";
+		base.appendChild(errorText);
+		var errorLabel = document.createElement('p');
+		errorLabel.innerText = text.length + "/" + maxTextLength + " characters highlighted.";
+		errorLabel.className = "label-text";
+		base.appendChild(errorLabel);
 	} else {
-		outText += "detected: " + gresult.detected + "\n"
-		 + gresult.text + "\n  -or-\n" + mresult.text + "\n";
+		var microsoftTranslation = await microsoftTranslate(text, 'es');
+		var googleTranslation = await googleTranslate(text, 'es');
+		var microsoftLabel = document.createElement('p');
+		microsoftLabel.innerText = "Microsoft:";
+		microsoftLabel.className = "label-text";
+		base.appendChild(microsoftLabel);
+		var microsoftText = document.createElement('p');
+		microsoftText.innerText = microsoftTranslation.text;
+		microsoftText.className = "main-text";
+		base.appendChild(microsoftText);
+		var googleLabel = document.createElement('p');
+		googleLabel.innerText = "Google:";
+		googleLabel.className = "label-text";
+		base.appendChild(googleLabel);
+		var googleText = document.createElement('p');
+		googleText.innerText = googleTranslation.text;
+		googleText.className = "main-text";
+		base.appendChild(googleText);
+		var detectedLabel = document.createElement('p');
+		detectedLabel.innerText = "Detected: " + languages[microsoftTranslation.detected].name;
+		detectedLabel.className = "label-text";
+		base.appendChild(detectedLabel);
+		var confidenceLabel = document.createElement('p');
+		confidenceLabel.innerText = "Confidence: " + microsoftTranslation.confidence;
+		confidenceLabel.className = "label-text";
+		base.appendChild(confidenceLabel);
 	}
-	origText.innerText = outText;
-	return origText;
+	return base;
 }
 
 async function makePopup(selection) {

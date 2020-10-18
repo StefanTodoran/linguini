@@ -47,7 +47,7 @@ async function getMicrosoftLanguages() {
  * @param  {String} text   
  *         The text to be translated.
  * @param  {String} targetLanguage
- *         The language the text will be translated to.
+ *         The id of the language the text will be translated to.
  * @return {Object}
  *         Values: "detected", "confidence", "text"
  */
@@ -95,7 +95,7 @@ async function getGoogleLanguages() {
  * @param  {String} text   
  *         The text to be translated.
  * @param  {String} targetLanguage
- *         The language the text will be translated to.
+ *         The id of the language the text will be translated to.
  * @return {Object}
  *         Values: "detected", "text"
  */
