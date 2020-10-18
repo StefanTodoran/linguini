@@ -4,26 +4,26 @@
   <style>
     .container {
       padding: 12.5px;
-      padding-top: 30px;
-      width: 300px;
-      height: 180px;
-      background: url("images/bgalt.png");
-      background-repeat: no-repeat;
-      background-size: contain;
+      /*padding-top: 30px;*/
       overflow: hidden;
+      background-color: #222222; 
+    }
+    .color {
+      color:white;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <p>Highlight any text and press the designated translate hotkey to view translations.</p>
-    <label for="languages">Select language:</label>
+    <img src="images/title.png" alt="Linguini" style="width:80px;height:25px;">
+    <p class="color">Highlight any text and press the designated translate hotkey to view translations.</p>
+    <label class="color" for="languages">Translate to:</label>
     <div>
       <select id="languages" name="languages">
       </select>
     </div>
     <br>
-    <label for="changeHotkey">Select Hotkey:</label>
+    <label class="color" for="changeHotkey">Select Hotkey:</label>
     <input type="button" id="changeHotkey" value="Click to Change (t)">
     <script src="translate.js"></script>
     <script src="popup.js"></script>
