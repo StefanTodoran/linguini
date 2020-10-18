@@ -24,3 +24,13 @@ chrome.tabs.executeScript( {
 		console.log("Highlighted selection has been updated.");
 	});
 });//*/
+
+function googletranslate(text, language, callback) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("POST", "https://translation.googleapis.com/language/translate/v2?key=" + googleKey);
+	xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+	xhttp.send('{"q": ["' + text + '"], "target": "' + language + '"}');
+	xhttp.onload = function() {
+	  callback(xhttp.response);
+	}
+}
