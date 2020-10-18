@@ -5,7 +5,7 @@ fetch(chrome.runtime.getURL("keys.json")).then(result => result.json()).then(res
 /**
  * Provides Linguini's supported languages.
  * @return {Object}
- *         Key: "id"
+ *         Keys: "id"
  *         Values: "name", "nativeName", "direction"
  */
 async function getLanguages() {
@@ -27,7 +27,7 @@ async function getLanguages() {
 /**
  * Provides Microsoft's supported languages.
  * @return {Object}
- *         Key: "id"
+ *         Keys: "id"
  *         Values: "name", "nativeName", "dir"
  */
 async function getMicrosoftLanguages() {
@@ -49,7 +49,6 @@ async function getMicrosoftLanguages() {
  * @param  {String} targetLanguage
  *         The language the text will be translated to.
  * @return {Object}
- *         Key: "id"
  *         Values: "detected", "confidence", "text"
  */
 async function microsoftTranslate(text, targetLanguage) {
@@ -98,7 +97,6 @@ async function getGoogleLanguages() {
  * @param  {String} targetLanguage
  *         The language the text will be translated to.
  * @return {Object}
- *         Key: "id"
  *         Values: "detected", "text"
  */
 async function googleTranslate(text, targetLanguage) {
