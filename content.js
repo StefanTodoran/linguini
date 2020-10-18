@@ -5,7 +5,7 @@ getLanguages().then(result => languages = result);
 
 function setupStyles() {
 	var link = document.createElement("link");
-	link.href = chrome.runtime.getURL("pagePopup.css");
+	link.href = chrome.runtime.getURL("main.css");
 	link.type = "text/css";
 	link.rel = "stylesheet";
 	document.getElementsByTagName("head")[0].appendChild(link);

@@ -1,5 +1,6 @@
-
 #linguini-popup-base {
+	all: initial;
+
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -15,10 +16,10 @@
 	border-style: solid;
 	border-width: 2px;
 	border-color: #ffcf40;
-	font-family: Arial;
 }
 
 #linguini-popup-base .main-text {
+	font-family: Arial;
 	padding: 5px;
 	font-weight: normal;
 	font-size: 16px;
@@ -28,6 +29,7 @@
 }
 
 #linguini-popup-base .label-text {
+	font-family: Arial;
 	padding: 5px;
 	font-weight: normal;
 	font-size: 10px;
