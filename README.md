@@ -15,7 +15,7 @@ Are they going to give you the role in the movie?
 This would make Microsoft's translation more accurate.
 However, Google's translation might be considered more elegant, conveying the same meaning in a way that is more accurate to how a native english speaker would speak.
 
-By balancing multiple translations, linguini gets at the heart of learning lanuage. It doesn't just give you one answer, it lets you read multiple interpretations in order to help you more fully understand what you are reading, and allow you to learn and advance.
+By balancing multiple translations, linguini gets at the heart of language learning. It doesn't just give you one answer, it lets you read multiple interpretations in order to help you more fully understand what you are reading, and allow you to adapt and advance.
 
 ### TL;DR
 Linguini is a browser extension designed to help you translate words and phrases at the press of a button. Its sleek, low-profile interface seamlessly integrates into chrome; you won't notice it when you don't need to use it. Created with language learners in mind, linguini offers multiple translations to help users find deeper understanding and assist learning.
@@ -24,3 +24,7 @@ Linguini is a browser extension designed to help you translate words and phrases
 * Translate instantly at the push of a button
 * Support for more than 70+ languages
 * Get translations from multiple translation APIs
+* Lightweight, takes up less than 200 KiB
+
+### Plans for the Future
+At the moment, linguini only supports showing translations from Microsoft translate and Google translate. However, there are far more options out there than just these two, some of which are far better than the big two (see DeepL Translate). Adding more translations to linguini is the most crucial step in improving the service, and is something we will continue to work on into the future. UX improvements are also in the works, as well as improvements to security.
