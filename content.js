@@ -61,7 +61,7 @@ async function makePopupInner(text) {
 async function makePopup(selection) {
 	var seltext = selection.toString();
 	clearPopups();
-	if (selection != "") {
+	if (selection !== "") {
 		console.log(selection);
 		console.log(seltext);
 		var selRange = selection.getRangeAt(0).getBoundingClientRect();
@@ -93,7 +93,7 @@ document.addEventListener('mouseup', function() {
 	clearPopups();
 	var selection = window.getSelection();
 	var seltext = selection.toString();
-	if (seltext == "") {
+	if (seltext === "") {
 		selection = null;
 	}
 	curSel = selection;
@@ -101,11 +101,11 @@ document.addEventListener('mouseup', function() {
 
 var hotkey; //can't set the default value here or we will have errors. see line 88
 chrome.storage.onChanged.addListener(function(changes, namespace) {
-	if (changes.hotkey != undefined) {
+	if (changes.hotkey !== undefined) {
 		let raw = changes.hotkey.newValue;
 		hotkey = raw;
 	}
-	if (changes.lang != undefined) {
+	if (changes.lang !== undefined) {
 		selLang = changes.lang.newValue;
 	}
 	console.log("Hotkey updated in content.js to "+hotkey);
@@ -117,15 +117,15 @@ chrome.storage.local.get(['lang'], function(result) {
 
 document.addEventListener("keydown", function (event) {
 	console.log("Keypress event occured. Set hotkey="+hotkey+" pressed key="+event.key);
-	console.log("(hotkey == undefined): "+(hotkey == undefined));
-	if (hotkey == undefined) {
+	console.log("(hotkey == undefined): "+(hotkey === undefined));
+	if (hotkey === undefined) {
 		chrome.storage.local.get(['hotkey'], function(result) {
 			hotkey = result.hotkey;
-			if (event.key == hotkey && curSel != null) {
+			if (event.key === hotkey && curSel != null) {
 				makePopup(curSel);
 			}
 		});
-	} else if (event.key == hotkey && curSel != null) {
+	} else if (event.key === hotkey && curSel != null) {
 		makePopup(curSel);
 	}
 });

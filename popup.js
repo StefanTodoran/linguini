@@ -1,7 +1,7 @@
 'use strict';
 
 let selectLang = document.getElementById("languages");
-let key = 't';
+let key = 'T';
 let langid = 'en';
 let languages;
 
