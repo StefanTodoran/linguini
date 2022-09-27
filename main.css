@@ -1,24 +1,20 @@
-body, input {
+.linguini-container, 
+.linguini-container input,
+.linguini-container select {
 	font-family: 'Quicksand', sans-serif;
+	font-size: small;
 	--theme-color: #FFCF40;
 }
 
-body {
-	margin: 5px;
+.linguini-container {
+	overflow: hidden;
+	padding: 12px;
 }
 
-hr {
+.linguini-container hr {
 	background-color: var(--theme-color);
 	height: 1px;
 	border: 0;
-}
-
-.container {
-	overflow: hidden;
-	background-color: #f0f0f0;
-	border: 1px solid #dedede;
-	border-radius: 5px;
-	padding: 12px;
 }
 
 #linguini-popup-base {

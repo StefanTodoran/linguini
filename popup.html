@@ -7,18 +7,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <img src="images/title.png" alt="Linguini" style="width:153px;height:48px;">
+  <div class="linguini-container">
+    <img src="images/title.png" alt="Linguini" style="width: 153px; height: 48px;">
     <hr>
-    <p class="color">Highlight any text and press the designated translate hotkey to view translations.</p>
-    <label class="color" for="languages">Translate to:</label>
+    <p>
+      Highlight any text and press the designated translate hotkey to view translations.
+    </p>
+    <label for="languages">Translate to:</label>
     <div>
       <select id="languages" name="languages">
       </select>
     </div>
     <br>
-    <label class="color" for="changeHotkey">Select Hotkey:</label>
-    <input type="button" id="changeHotkey" value="Click to Change (t)">
+    <label for="changeHotkey">Select Hotkey:</label>
+    <input type="button" id="changeHotkey" value="Click to Change (T)">
     <script src="translate.js"></script>
     <script src="popup.js"></script>
   </div>

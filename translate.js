@@ -1,6 +1,11 @@
 var keys = null;
 
-fetch(chrome.runtime.getURL("keys.json")).then(result => result.json()).then(result => keys = result);
+fetch(chrome.runtime.getURL("keys.json"))
+    .then(result => result.json())
+    .then(result => keys = result)
+    .catch(err => {
+        console.log(err);
+    });
 
 /**
  * Provides Linguini's supported languages.
@@ -78,15 +83,15 @@ async function microsoftTranslate(text, targetLanguage) {
  *         Values: "id"
  */
 async function getGoogleLanguages() {
-    var response = await fetch("https://translation.googleapis.com/language/translate/v2/languages?key=" + keys.google.key, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    response = await response.json();
+    // var response = await fetch("https://translation.googleapis.com/language/translate/v2/languages?key=" + keys.google.key, {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     }
+    // });
+    // response = await response.json();
     var languages = [];
-    response.data.languages.forEach(element => languages.push(element.language));
+    // response.data.languages.forEach(element => languages.push(element.language));
     return languages;
 }
 

@@ -10,12 +10,20 @@ window.onload = async function() {
 	var dropdown = document.getElementById('languages');
 	languages = await getLanguages();
 	for (let id of Object.keys(languages)) {
-		var item = document.createElement('option');
+		const item = document.createElement('option');
 		item.value = id;
 		item.id = 'lang-element-' + id;
 		item.innerText = languages[id].nativeName;
 		dropdown.appendChild(item);
 	}
+
+	if (Object.keys(languages).length === 0) {
+		const item = document.createElement('option');
+		item.value = null;
+		item.innerText = "Failed to load options";
+		dropdown.appendChild(item);
+	}
+
 	chrome.storage.local.get(['hotkey'], function(result) {
 		key = result.hotkey;
 		console.log(result.hotkey);

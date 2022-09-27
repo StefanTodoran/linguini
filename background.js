@@ -1,7 +1,7 @@
 'use strict';
 
-chrome.storage.local.set({hotkey: 't'}, function() {
-	console.log("Default hotkey is set to 't'.");
+chrome.storage.local.set({hotkey: 'T'}, function() {
+	console.log("Default hotkey is set to 'T'.");
 });
 
 chrome.runtime.onInstalled.addListener(function() {
