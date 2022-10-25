@@ -1,0 +1,64 @@
+.linguini-container, 
+.linguini-container input,
+.linguini-container select {
+	font-family: 'Quicksand', sans-serif;
+	font-size: small;
+	--theme-color: #FFCF40;
+}
+
+.linguini-container {
+	overflow: hidden;
+	padding: 12px;
+}
+
+.linguini-container hr {
+	background-color: var(--theme-color);
+	height: 1px;
+	border: 0;
+}
+
+#linguini-popup-base {
+	all: initial;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	
+	position: fixed;
+	background-color: white;
+	z-index: 999999;
+	
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: var(--theme-color);
+	
+	line-height: normal;
+	margin: 0px;
+}
+
+#linguini-popup-base .inner-div {
+	padding: 10px;
+}
+
+#linguini-popup-base .main-text {
+	padding: 0px;
+	padding-bottom: 8px;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: normal;
+	color: black;
+	margin: 0px;
+}
+
+#linguini-popup-base .label-text {
+	padding: 0px;
+	font-weight: normal;
+	font-size: 10px;
+	line-height: normal;
+	color: #444444;
+	margin: 0px;
+}
