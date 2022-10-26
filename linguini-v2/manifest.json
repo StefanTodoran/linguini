@@ -9,7 +9,31 @@
     "48": "images/get_started48.png",
     "128": "images/get_started128.png"
   },
-  "permissions": ["contextMenus"],
+  "permissions": [
+    "contextMenus"
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "fetch.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "inject.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+
   "background": {
     "service_worker": "background.js"
   },
