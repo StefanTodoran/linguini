@@ -1,4 +1,5 @@
-![Project Linguini](https://github.com/spicyshrek/linguini/blob/main/images/title_128.png "Project Linguini")
+<!-- ![Project Linguini](images/banner.png "Project Linguini") -->
+<img src="images/banner.png" style="max-width: 50%;" alt="Project Linguini"/>
 
 ### What & Why
 The ultimate goal of any person learning a language is to eventually never need a translator ever again. 
@@ -6,7 +7,7 @@ As language students ourselves we know all too well how tedious and often blantl
 
 When it comes to translation APIs, each one out there is unique. Some may be better at short phrases and individual words, while others require more context but are more adept at complex passages. With linguini, not only can you get the best of both worlds, comparing and contrasting mutliple translation services, but you get unparalleled convenience. 
 
-![Example Image](https://github.com/spicyshrek/linguini/blob/main/images/example_1.png "A comparison MicroSoft and Google translations")
+![Example Image](images/example_1.png "A comparison MicroSoft and Google translations")
 
 In the example above, the correct literal translation would be
 ```
